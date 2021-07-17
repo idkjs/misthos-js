@@ -1,14 +1,14 @@
-[@bs.module "blockstack"]
+[@bs.module "blockstack/lib/storage"]
 external getFileDecrypted : string => Js.Promise.t(Js.nullable(string)) =
   "getFile";
 
-[@bs.module "blockstack"]
+[@bs.module "blockstack/lib/storage"]
 external getFileNotDecrypted :
   (string, [@bs.as {json| {"decrypt": false} |json}] _) =>
   Js.Promise.t(Js.nullable(string)) =
   "getFile";
 
-[@bs.module "blockstack"]
+[@bs.module "blockstack/lib/storage"]
 external getFileWithJsOpts :
   (string, Js.t({..})) => Js.Promise.t(Js.nullable(string)) =
   "getFile";
@@ -44,16 +44,16 @@ external putFileNotEncrypted :
 external getUserAppFileUrl :
   (~path: string, ~username: string, ~appOrigin: string) =>
   Js.Promise.t(string) =
-  "";
+  "getUserAppFileUrl";
 
 [@bs.module "blockstack/lib/keys.js"]
-external makeECPrivateKey : unit => string = "";
+external makeECPrivateKey : unit => string = "makeECPrivateKey";
 
 type profile;
-[@bs.module "blockstack"]
-external lookupProfile : string => Js.Promise.t(profile) = "";
+[@bs.module "blockstack/lib/profiles"]
+external lookupProfile : string => Js.Promise.t(profile) = "lookupProfile";
 
-[@bs.module "blockstack/lib/encryption.js"]
-external encryptECIES : (~publicKey: string, string) => Js.Json.t = "";
-[@bs.module "blockstack/lib/encryption.js"]
-external decryptECIES : (~privateKey: string, Js.Json.t) => string = "";
+[@bs.module "blockstack/lib/encryption"]
+external encryptECIES : (~publicKey: string, string) => Js.Json.t = "encryptECIES";
+[@bs.module "blockstack/lib/encryption"]
+external decryptECIES : (~privateKey: string, Js.Json.t) => string = "decryptECIES";
